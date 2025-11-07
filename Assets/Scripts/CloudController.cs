@@ -34,12 +34,16 @@ public class CloudController : MonoBehaviour
 
     private void Update()
     {
+        // process moving only when moving
         if (!m_isMoving)
         {
             return;
         }
 
+        // first multiply numbers, then vector
+        // (just an example)
         // Vector3 velocity = Vector3.zero * (m_speed * Time.deltaTime);
+
         transform.position = Vector3.Lerp(transform.position, m_position, m_speed * Time.deltaTime);
 
         if (Vector3.Distance(transform.position, m_position) < 0.01f)
