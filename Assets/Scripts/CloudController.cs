@@ -7,7 +7,7 @@ public class CloudController : MonoBehaviour
 
     private int m_index = -1;
     private Vector3 m_position;
-    private bool m_isMove;
+    private bool m_isMoving;
 
     // It moves to the 1st position
     private void Start()
@@ -29,12 +29,12 @@ public class CloudController : MonoBehaviour
         // y is the same all the time
         m_position.y = transform.position.y;
 
-        m_isMove = true;
+        m_isMoving = true;
     }
 
     private void Update()
     {
-        if (!m_isMove)
+        if (!m_isMoving)
         {
             return;
         }
@@ -44,7 +44,7 @@ public class CloudController : MonoBehaviour
 
         if (Vector3.Distance(transform.position, m_position) < 0.01f)
         {
-            m_isMove = false;
+            m_isMoving = false;
         }
     }
 }
