@@ -5,6 +5,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private FreeCamera m_camera;
     [SerializeField] private GameObject m_uiPanel;
     [SerializeField] private CloudController m_cloudController;
+    [SerializeField] private VillagerToolController m_villagerToolController;
 
     private void Update()
     {
@@ -17,9 +18,14 @@ public class PlayerController : MonoBehaviour
         }
         m_camera.Move();
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
             m_cloudController.MoveNext();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            m_villagerToolController.ChangeTools();
         }
     }
 }
