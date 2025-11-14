@@ -1,27 +1,24 @@
+using System;
 using UnityEngine;
 
 namespace Golf
 {
     public class Stone : MonoBehaviour
     {
-        [SerializeField] private int m_clubLayerMask;
-        private bool m_hasCollided = false;
+        // name events without "On..."
+        public event Action<Stone> Hit;
+        public event Action<Stone> Missed;
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (!m_hasCollided)
+            if (collision.gameObject.GetComponent<Club>())
             {
-                if (collision.gameObject.layer == m_clubLayerMask)
-                {
-                    Debug.Log("Stone has collided with the club");
-                }
-                else
-                {
-                    Debug.Log("Stone has collided with ground");
-                }
+                Hit?.Invoke(this);
             }
-            
-            m_hasCollided = true;
+            else
+            {
+                Missed?.Invoke(this);
+            }
         }
     }
 }
