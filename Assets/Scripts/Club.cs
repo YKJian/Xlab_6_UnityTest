@@ -39,7 +39,6 @@ namespace Golf
 
         private void OnCollisionEnter(Collision collision)
         {
-
             if (collision.gameObject.TryGetComponent<Stone>(out var stone))
             {
                 stone.GetComponent<Rigidbody>().AddForce(m_power * m_direction, ForceMode.Force);
