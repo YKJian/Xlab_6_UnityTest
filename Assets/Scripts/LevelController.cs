@@ -1,14 +1,13 @@
-using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 namespace Golf
 {
     public class LevelController : MonoBehaviour
     {
-        public event Action Finished;
+        public event Action<int> Finished;
 
         [SerializeField] private int m_missedCount;
         [SerializeField] [Min(0)] private float m_spawnRate = 0.5f;
@@ -19,7 +18,7 @@ namespace Golf
         private List<Stone> m_stones;
         private int m_currentMissedCount;
 
-        private void Awake()
+        private void OnEnable()
         {
             m_currentMissedCount = m_missedCount;
             m_stones = new List<Stone>();
@@ -32,6 +31,7 @@ namespace Golf
             if (m_time >= m_spawnRate)
             {
                 Stone stone = m_stoneSpawner.Spawn();
+                m_stones.Add(stone);
 
                 stone.Hit += OnHitStone;
                 stone.Missed += OnMissed;
@@ -52,10 +52,11 @@ namespace Golf
             Unsubscribe(stone);
 
             m_currentMissedCount--;
+
             if (m_currentMissedCount <= 0)
             {
                 Debug.Log("Gameover");
-                Finished?.Invoke();
+                Finished?.Invoke(m_scoreManager.score);
 
                 foreach (var item in m_stones)
                 {

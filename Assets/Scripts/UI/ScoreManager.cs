@@ -9,7 +9,7 @@ namespace Golf
 
         private int m_score;
 
-        public int Score 
+        public int score 
         { 
             get => m_score;
             private set
@@ -22,13 +22,12 @@ namespace Golf
 
         public void Increase()
         {
-            Score++;
-            Debug.Log($"Score: {Score}");
+            score++;
         }
 
         public void Reset()
         {
-            Score = 0;
+            score = 0;
         }
     }
 }

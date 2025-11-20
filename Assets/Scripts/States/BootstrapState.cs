@@ -6,6 +6,7 @@ namespace Golf
     {
         [SerializeField] private LevelController m_levelController;
         [SerializeField] private PlayerController m_playerController;
+        
         private GameStateMachine m_gameStateMachine;
 
         public void Initialize(GameStateMachine gameStateMachine)
