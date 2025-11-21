@@ -2,14 +2,14 @@ using UnityEngine;
 
 namespace Golf
 {
-    public class BootstrapState : MonoBehaviour
+    public class BootstrapState : StateBase
     {
         [SerializeField] private LevelController m_levelController;
         [SerializeField] private PlayerController m_playerController;
         
         private GameStateMachine m_gameStateMachine;
 
-        public void Initialize(GameStateMachine gameStateMachine)
+        public override void Initialize(GameStateMachine gameStateMachine)
         {
             m_levelController.enabled = false;
             m_playerController.enabled = false;
@@ -17,12 +17,12 @@ namespace Golf
             m_gameStateMachine = gameStateMachine;
         }
 
-        public void Enter()
+        public override void Enter()
         {
             m_gameStateMachine.Enter<MainMenuState>();
         }
 
-        public void Exit()
+        public override void Exit()
         {
 
         }

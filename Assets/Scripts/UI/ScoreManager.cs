@@ -6,6 +6,7 @@ namespace Golf
     public class ScoreManager : MonoBehaviour
     {
         public event Action<int> ScoreChanged;
+        public event Action<int> HighestScoreChanged;
 
         private int m_score;
 
@@ -18,11 +19,31 @@ namespace Golf
                 Debug.Log($"Score: {value}");
                 ScoreChanged?.Invoke(value);
             }
-         }
-
-        public void Increase()
+        }
+        public int highestScore
         {
-            score++;
+            get => PlayerPrefs.GetInt(GlobalConstants.HighestScore, 0);
+            
+            private set
+            {
+                var temp = PlayerPrefs.GetInt(GlobalConstants.HighestScore, 0);
+
+                if (temp < value)
+                {
+                    PlayerPrefs.SetInt(GlobalConstants.HighestScore, value);
+                    HighestScoreChanged?.Invoke(value);
+                }
+            }
+        }
+
+        public void UpdateHighestScore()
+        {
+            highestScore = score;
+        }
+
+        public void Increase(int stoneScore)
+        {
+            score += stoneScore;
         }
 
         public void Reset()

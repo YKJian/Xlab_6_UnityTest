@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace Golf
 {
-    public class MainMenuState : MonoBehaviour
+    public class MainMenuState : StateBase
     {
         [SerializeField] private GameObject m_mainMenuRoot;
         [SerializeField] private Button m_playButton;
@@ -11,7 +11,7 @@ namespace Golf
 
         private GameStateMachine m_gameStateMachine;
 
-        public void Initialize(GameStateMachine gameStateMachine)
+        public override void Initialize(GameStateMachine gameStateMachine)
         {
             m_mainMenuRoot.SetActive(false);
             m_scoreBoard.gameObject.SetActive(false);
@@ -19,7 +19,7 @@ namespace Golf
             m_gameStateMachine = gameStateMachine;
         }
 
-        public void Enter()
+        public override void Enter()
         {
             m_mainMenuRoot.SetActive(true);
             m_scoreBoard.gameObject.SetActive(true);
@@ -27,7 +27,7 @@ namespace Golf
             m_playButton.onClick.AddListener(OnClicked);
         }
 
-        public void Exit()
+        public override void Exit()
         {
             m_mainMenuRoot.SetActive(false);
             m_scoreBoard.gameObject.SetActive(false);

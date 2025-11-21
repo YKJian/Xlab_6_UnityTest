@@ -43,8 +43,7 @@ namespace Golf
         private void OnHitStone(Stone stone)
         {
             Unsubscribe(stone);
-
-            m_scoreManager.Increase();
+            m_scoreManager.Increase(stone.score);
         }
 
         private void OnMissed(Stone stone)
