@@ -9,14 +9,15 @@ namespace Golf
     {
         [SerializeField] private Button m_scoreBoardButton;
         [SerializeField] private GameObject m_scoreBoard;
-        [SerializeField] private List<TextMeshProUGUI> m_scores;
-        
-        private List<string> m_stringScores = new List<string>();
-        private int m_storedScore;
+        [SerializeField] private List<TextMeshProUGUI> m_recentScores;
+        [SerializeField] private string m_format;
 
-        private void Start()
+        private List<string> m_stringScores = new List<string>();
+        private int m_storedScores;
+
+        private void Awake()
         {
-            for (int i = 0; i < m_scores.Count; i++)
+            for (int i = 0; i < m_recentScores.Count; i++)
             {
                 m_stringScores.Add("0");
             }
@@ -24,6 +25,7 @@ namespace Golf
 
         private void OnEnable()
         {
+            UpdateRecentScores();
             m_scoreBoardButton.onClick.AddListener(OnClicked);
         }
 
@@ -39,17 +41,23 @@ namespace Golf
 
         public void AddLastScore(int score)
         {
-            if (m_storedScore >= m_stringScores.Count)
+            if (m_storedScores >= m_stringScores.Count)
             {
                 m_stringScores.RemoveAt(m_stringScores.Count - 1);
             }
 
-            m_stringScores.Insert(1, score.ToString());
-            m_storedScore++;
+            m_stringScores.Insert(0, score.ToString());
+            m_storedScores++;
 
-            for (int i = 1; i < m_scores.Count; i++)
+            UpdateRecentScores();
+        }
+
+        private void UpdateRecentScores()
+        {
+            for (int i = 0; i < m_recentScores.Count; i++)
             {
-                m_scores[i].text = m_stringScores[i];
+                m_format ??= string.Empty;
+                m_recentScores[i].text = string.Format(m_format, m_stringScores[i]);
             }
         }
     }

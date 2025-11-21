@@ -21,16 +21,16 @@ namespace Golf
 
         private void OnEnable()
         {
-            OnRecordChanged(m_scoreManager.score);
-            m_scoreManager.HighestScoreChanged += OnRecordChanged;
+            OnHighestScoreChanged(m_scoreManager.highestScore);
+            m_scoreManager.HighestScoreChanged += OnHighestScoreChanged;
         }
 
         private void OnDisable()
         {
-            m_scoreManager.HighestScoreChanged -= OnRecordChanged;            
+            m_scoreManager.HighestScoreChanged -= OnHighestScoreChanged;            
         }
 
-        private void OnRecordChanged(int value)
+        private void OnHighestScoreChanged(int value)
         {
             m_format ??= string.Empty;
             m_text.text = string.Format(m_format, value.ToString());
