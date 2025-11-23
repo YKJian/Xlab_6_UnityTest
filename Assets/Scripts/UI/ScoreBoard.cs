@@ -9,7 +9,7 @@ namespace Golf
     {
         [SerializeField] private Button m_scoreBoardButton;
         [SerializeField] private GameObject m_scoreBoard;
-        [SerializeField] private List<TextMeshProUGUI> m_recentScores;
+        [SerializeField] private TextMeshProUGUI[] m_recentScores;
         [SerializeField] private string m_format;
 
         private List<string> m_stringScores = new List<string>();
@@ -17,7 +17,7 @@ namespace Golf
 
         private void Awake()
         {
-            for (int i = 0; i < m_recentScores.Count; i++)
+            for (int i = 0; i < m_recentScores.Length; i++)
             {
                 m_stringScores.Add("0");
             }
@@ -54,7 +54,7 @@ namespace Golf
 
         private void UpdateRecentScores()
         {
-            for (int i = 0; i < m_recentScores.Count; i++)
+            for (int i = 0; i < m_recentScores.Length; i++)
             {
                 m_format ??= string.Empty;
                 m_recentScores[i].text = string.Format(m_format, m_stringScores[i]);

@@ -22,7 +22,7 @@ namespace Golf
             score = m_data[Random.Range(0, m_data.Length)].score;
         }
 
-        private void OnCollisionEnter(Collision collision)
+        protected virtual void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.GetComponent<Club>())
             {

@@ -15,9 +15,16 @@ namespace Golf
             get => m_score;
             private set
             {
-                m_score = value;
-                Debug.Log($"Score: {value}");
-                ScoreChanged?.Invoke(value);
+                if (value <= 0)
+                {
+                    m_score = 0;
+                }
+                else
+                {
+                    m_score = value;
+                }
+                Debug.Log($"Score: {m_score}");
+                ScoreChanged?.Invoke(m_score);
             }
         }
         public int highestScore

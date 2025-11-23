@@ -43,7 +43,13 @@ namespace Golf
         private void OnHitStone(Stone stone)
         {
             Unsubscribe(stone);
-            m_scoreManager.Increase(stone.score);
+            
+            m_scoreManager.Increase(stone.score); 
+            
+            if (m_scoreManager.score <= 0)
+            {
+                Gameover();
+            }
         }
 
         private void OnMissed(Stone stone)
@@ -54,14 +60,7 @@ namespace Golf
 
             if (m_currentMissedCount <= 0)
             {
-                Debug.Log("Gameover");
-                Finished?.Invoke(m_scoreManager.score);
-
-                foreach (var item in m_stones)
-                {
-                    Destroy(item.gameObject); 
-                }
-                m_stones.Clear();
+                Gameover();
             }
         }
 
@@ -69,6 +68,18 @@ namespace Golf
         {
             stone.Hit -= OnHitStone;
             stone.Missed -= OnMissed;
+        }
+
+        private void Gameover()
+        {
+            Debug.Log("Gameover");
+            Finished?.Invoke(m_scoreManager.score);
+
+            foreach (var item in m_stones)
+            {
+                if (item) Destroy(item.gameObject);
+            }
+            m_stones.Clear();
         }
     }
 }
