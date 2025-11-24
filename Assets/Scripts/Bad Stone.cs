@@ -4,13 +4,13 @@ namespace Golf
 {
     public class BadStone : Stone
     {
-        [SerializeField] private ParticleSystem _particleSystem;
+        [SerializeField] private ParticleSystem m_particleSystem;
 
         protected override void OnCollisionEnter(Collision collision)
         {
             if (!collision.gameObject.GetComponent<Club>())
             {
-                ParticleSystem particleSystem = Instantiate(_particleSystem, transform.position, transform.rotation);
+                ParticleSystem particleSystem = Instantiate(m_particleSystem, transform.position, transform.rotation);
                 particleSystem.Play();
 
                 Destroy(gameObject);

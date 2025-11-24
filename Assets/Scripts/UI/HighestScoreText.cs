@@ -10,7 +10,6 @@ namespace Golf
         [SerializeField] private ScoreManager m_scoreManager;
         [SerializeField] private string m_format;
 
-        // on init, on change
         private void OnValidate()
         {
             if (!m_text)
