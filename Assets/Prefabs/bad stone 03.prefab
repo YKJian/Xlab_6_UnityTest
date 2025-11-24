@@ -107,7 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Golf.BadStone
   m_data:
   - {fileID: 11400000, guid: 3dbc1f42ecc15aa4eaaa545a50574856, type: 2}
-  _particleSystem: {fileID: 488809402754196122, guid: aa7373bf4389b5e4f96f52cf02d4ceaa, type: 3}
+  m_particleSystem: {fileID: 488809402754196122, guid: aa7373bf4389b5e4f96f52cf02d4ceaa, type: 3}
 --- !u!54 &8162886494925206632
 Rigidbody:
   m_ObjectHideFlags: 0
